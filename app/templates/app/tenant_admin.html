@@ -1,0 +1,52 @@
+{% extends "app/blocks.html" %}
+{% block signout %}
+		<a href="{% url "logout" %}" style="font-size:15px;">logout</a>
+{% endblock signout %}
+{%block c%}
+	<h2>Tenant Admin</h2>
+	<hr>
+	<p>Name: {{user.first_name}} {{user.last_name}} &nbsp&nbsp&nbsp&nbsp Email: <a href="emailto:{{ user.email }}">{{user.email}}</a></p>
+	<p>Organization: {{tenant.name}}</p>
+	<p>Total Storage Allowed: {{tenant.space}} GB</p>
+	<hr>
+	<a  href="../create_user/">Create New User</a>
+	<hr>
+	<h3>Privileged User Configuration</h3>
+	{% for userT in userType %}
+		{% if userT.userType == 'P' %}<!--Privileged User Configuration P -->
+			<p>Total Space: {{userT.maxStorage}} GB</p>
+			<p>File size (max): {{userT.maxSize}} MB</p>
+			<p>Allowed Extensions: {{userT.allowedExt}}</p>
+			<a  href="../edit_privileged_rights/">Edit</a> 
+		{% endif %}
+	{% endfor %}
+	<hr>
+	<h3>Normal User Configuration</h3>
+	{% for userT in userType %}
+		{% if userT.userType == 'N' %} <!--Normal User Configuration N -->
+			<p>Total Space: {{userT.maxStorage}} GB</p>
+			<p>File size (max): {{userT.maxSize}} MB</p>
+			<p>Allowed Extensions: {{userT.allowedExt}}</p>
+		{% endif %}
+	{% endfor %}
+	<a href="../edit_standard_rights/">Edit</a>
+	<hr>
+	<h2>Users
+	</h2>
+	<table class="table table-hover">
+	<tr>
+		<td><b>Username</b></td>
+		<td><b>First Name</b></td>
+		<td><b>Last Name</b></td>
+		<td><b>User Type</b></td>
+	</tr>	
+		{% for user in userAll%}
+		<tr>
+			<td>{{user.user.username}}</td>
+			<td>{{user.user.first_name}}</td>
+			<td>{{user.user.last_name}}</td>
+			<td>{{user.userType}}</td>
+		</tr>			
+		{% endfor %}
+	<hr>
+{% endblock c%}

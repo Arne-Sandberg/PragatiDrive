@@ -1,0 +1,8 @@
+{% extends "app/blocks.html" %}
+{% block signout %}
+		<a href="{% url "logout" %}" style="font-size:15px;">logout</a>
+{% endblock signout %}
+{%block c%}
+<h3>Invalid username or password.</h3>	
+<p>Click <a href="../login/">here</a> to try again!</p>
+{%endblock c%}

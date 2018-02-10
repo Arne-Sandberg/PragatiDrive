@@ -1,0 +1,58 @@
+{% extends "app/blocks.html" %}
+{% block signout %}
+		<a href="{% url "logout" %}" style="font-size:15px;">logout</a>
+{% endblock signout %}
+
+{%block c%}
+	<h2>Welcome, {{user.first_name}}! Standard user</h2>	
+	
+	<hr>
+	<p>Name: {{user.first_name}} {{user.last_name}} &nbsp&nbsp&nbsp&nbsp Email: <a href="mailto:{{ user.email }}">{{user.email}}</a></p>
+	<p>Organization: {{tenant.name}}</p>
+	<hr>
+	<p>Total Storage Allowed: {{userType.maxStorage}} GB</p>
+	<p>Total Space Used: {{sizeUsed|filesizeformat}}</p>
+	<p>Allowed file extentions: {{userType.allowedExt}}</p>
+	<p>Max file size allowed: {{userType.maxSize}} MB</p>
+	<hr>
+	<form action="{% url "standard_user" %}" method="post" enctype="multipart/form-data" class="form-inline">
+				{% csrf_token %}
+
+		<div class="form-group">
+		    <label class="sr-only" for="docfile">Select file to upload:</label>
+		    <div class="input-group" style="background-color:#ffffff;  border-style: solid;
+    border-width: 1px;border-radius:3px;border-color:#aaaaaa;">
+		      <div class="input-group-addon" style="padding:-5px;"> <span class="glyphicon glyphicon-file"></div>
+    			<input type="file" name="docfile" id="docfile">
+		    </div>
+		  </div>
+    	<input type="submit" value="Upload" name="submit">
+	</form>
+	{% if files %}
+
+		<div class="col-lg-9">
+		<table class="table table-hover" >
+			<tr>
+				<td><b>File Name</b></td>
+				<td><b>Size</b></td>
+				<td><b>Date&Time</b></td> 
+				<td><b>Delete</b></td>
+			</tr>
+			<form  action="{% url "delete_file_s" %}" method="post">
+				{% csrf_token %}
+				{% for file in files%}				
+					<tr>
+						<td><a href="../../{{file.upfile.url}}">{{ file.upfile.url }}</a></td>
+						<td>{{ file.upfile.size|filesizeformat }}</td>
+						<td>{{ file.dateTime }}</td>
+						<td><button type="submit" name="file_id" label="{{ file.id }}" value="{{ file.id }}">Delete</button></a></td>
+					</tr>
+				{% endfor %}
+			</form>
+			<hr>
+		</table>
+		</div>
+	{% else %}
+		<p> No documents uploaded. </p>
+	{% endif %}
+{% endblock c%}

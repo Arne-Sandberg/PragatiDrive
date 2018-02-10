@@ -1,0 +1,17 @@
+{% extends "app/blocks.html" %}
+{% block c %}
+<div id="login">
+  <h1><strong>Login</strong></h1>
+
+  <form action="/app/auth/" method="post">
+    <fieldset>
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <p><input type="text" required placeholder="Username" id="username" name="username" ></p>
+    <label for="password">Password</label>
+    <p><input type="password" required placeholder="Password" id="password" name="password"></p>
+    <p><input type="submit" value="Login"></p>
+    </fieldset>
+  </form>
+</div>
+{% endblock c%}

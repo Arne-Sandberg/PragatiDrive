@@ -1,0 +1,32 @@
+{% extends "app/blocks.html" %}
+{% block signout %}
+		<a href="{% url "logout" %}" style="font-size:15px;">logout</a>
+{% endblock signout %}
+{%block c%}
+<div id="login">
+<h3><strong>Create User</strong></h3> 
+<form action="/app/creating_user/" method="post">
+	{% csrf_token %}
+	<fieldset>
+		<p>User Type:
+			<select name="userType">
+				<option value="N">Standard</option>
+				<option value="P">Privileged</option>
+			</select>
+		</p>	
+		<label for="fname">First Name</label>
+		<p><input type="text"  id="fname" name="fName"></p>
+		<label for="lname">Last Name</label>
+		<p><input type="text"  id="lname" name="lName"></p>
+		<label for="email">Email ID</label>
+		<p><input type="text"  id="email" name="email"></p>
+		<label for="username">Username</label>
+		<p><input type="text"  id="username" name="username" ></p>
+		<label for="password">Password</label>
+		<p><input type="password" required placeholder="Password" id="password" name="password"></p>
+		<p><input type="submit" value="Save"></p>
+	</fieldset>
+</form>
+
+</div> <!-- end login -->
+{% endblock c%}

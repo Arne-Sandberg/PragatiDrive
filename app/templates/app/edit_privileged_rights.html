@@ -1,0 +1,23 @@
+{% extends "app/blocks.html" %}
+{% block signout %}
+    <a href="{% url "logout" %}" style="font-size:15px;">logout</a>
+{% endblock signout %}
+{%block c%}
+<div id="login">
+<h1><strong>Edit Privileged Rights</strong></h1>
+
+<form action="/app/set_privileged_rights/" method="post">
+            {% csrf_token %}
+     <fieldset>
+      <label for="totalSpace">Space for user (in GBS)</label>
+          <p><input type="text" required placeholder="" id="totalSpace" name="totalSpace" >
+         <label for="maxSize">Enter maximum size for individual files</label>   
+          <p><input type="text" name="maxSize" ></p>
+          <label for="ext">Enter all allowed file extension</label> 
+          <p><input type="text" required placeholder="(use ',' seperation)" id="ext" name="ext"></p>
+          <p><input type="submit" value="Save"></p>
+     </fieldset>
+</form>
+
+</div> <!-- end login -->
+{% endblock c%}

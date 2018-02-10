@@ -1,0 +1,32 @@
+{% extends "app/blocks.html" %}
+{% block signout %}
+		<a href="{% url "logout" %}" style="font-size:15px;">logout</a>
+{% endblock signout %}
+{%block c%}
+<div id="login">
+
+<form action="/app/save_tenant/" method="post">
+	{% csrf_token %}
+<fieldset>
+<h3><b>Add Tenant</b></h3>
+<label for="name">Organization Name</label>
+<p><input type="text"  id="name" name="name" ></p>
+<label for="space">Total Space</label>
+<p><input type="text" id="space" name="space" ></p>
+<h3><b>Admin Details</b></h3>
+<label for="adminname">Admin Username</label>
+<p><input type="text" required placeholder="Admin Name" id="adminname" name="adminname" ></p>
+<label for="email">Email ID</label>
+<p><input type="text" required placeholder="Email ID" id="email" name="email"></p>
+<label for="fname">First Name</label>
+<p><input type="text" required placeholder="First name" id="fname" name="fname"></p>
+<label for="lname">Last Name</label>
+<p><input type="text" required placeholder="Last name" id="lname" name="lname"></p>
+<label for="password">Password</label>
+<p><input type="password" required placeholder="Password" id="password" name="password"></p>
+<p><input type="submit" value="Save"></p>
+</fieldset>
+</form>
+
+</div> <!-- end login -->
+{% endblock c%}
